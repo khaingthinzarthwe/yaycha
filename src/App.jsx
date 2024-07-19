@@ -9,6 +9,7 @@ export default function App() {
     { id: 2, content: "React is fun.", name: "Bob" },
     { id: 3, content: "Yay, interesting.", name: "Chris" },
   ]);
+  const [showForm, setShowForm] = useState(false);
 
   const remove = (id) => {
     setData(data.filter((item) => item.id !== id));
@@ -21,8 +22,29 @@ export default function App() {
 
   return (
     <div style={{ maxWidth: 600, margin: "20px auto" }}>
-      <h1>Yaycha</h1>
-      <Form add={add} />
+      <h1
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        Foodie
+        <button
+          onClick={() => setShowForm(!showForm)}
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 50,
+            border: "0 none",
+            background: showForm ? "#dc3545" : "#0d6efd",
+            color: "white",
+          }}
+        >
+          {showForm ? "×" : "+"}
+        </button>
+      </h1>
+      {showForm && <Form add={add} />}
       <List>
         {data.map((item) => (
           <Item key={item.id} item={item} remove={remove} />

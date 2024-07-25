@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useMemo } from "react";
 import App from "./App";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { deepPurple, grey } from "@mui/material/colors";
 
 const AppContext = createContext();
 export function useApp() {
@@ -14,6 +15,11 @@ export default function ThemedApp() {
   const theme = useMemo(() => {
     return createTheme({
       palette: { mode },
+      primary: deepPurple,
+      banner: mode === "dark" ? grey[800] : grey[200],
+      text: {
+        fade: grey[500],
+      },
     });
   }, [mode]);
 

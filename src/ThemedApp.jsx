@@ -5,6 +5,7 @@ import {
   CssBaseline,
   ThemeProvider,
   createTheme,
+  Snackbar,
 } from "@mui/material";
 import { deepPurple, grey } from "@mui/material/colors";
 
@@ -16,6 +17,7 @@ export function useApp() {
 export default function ThemedApp() {
   const [showDrawer, setShowDrawer] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [globalMsg, setGlobalMsg] = useState(null);
   const [auth, setAuth] = useState(null);
   const [mode, setMode] = useState("dark");
 
@@ -40,6 +42,8 @@ export default function ThemedApp() {
           setShowDrawer,
           showForm,
           setShowForm,
+          globalMsg,
+          setGlobalMsg,
           auth,
           setAuth,
           mode,
@@ -48,6 +52,16 @@ export default function ThemedApp() {
       >
         <App />
         <AppDrawer />
+        <Snackbar
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "bottom",
+          }}
+          open={Boolean(globalMsg)}
+          autoHideDuration={6000}
+          onClose={() => setGlobalMsg(null)}
+          message={globalMsg}
+        />
         <CssBaseline />
       </AppContext.Provider>
     </ThemeProvider>

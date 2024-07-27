@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Box, Card, CardContent, Typography, IconButton } from "@mui/material";
+import { Box, Card, CardContent, Typography, IconButton, CardMedia } from "@mui/material";
 import {
   Alarm as TimeIcon,
   AccountCircle as UserIcon,
@@ -7,9 +7,10 @@ import {
 } from "@mui/icons-material";
 import { green } from "@mui/material/colors";
 
-export default function Item({ item, remove }) {
+export default function Item({ item, remove, primary }) {
   return (
     <Card sx={{ mb: 2 }}>
+      {primary && <CardMedia sx={{ height: 50, bgcolor: green[500] }} />}
       <CardContent>
         <Box
           sx={{

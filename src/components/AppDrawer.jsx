@@ -17,12 +17,14 @@ import {
   PersonAdd as RegisterIcon,
   Login as LoginIcon,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 import { deepPurple } from "@mui/material/colors";
 import { useApp } from "../ThemedApp";
 
 export default function AppDrawer() {
   const { showDrawer, setShowDrawer, auth, setAuth } = useApp();
-  
+  const navigate = useNavigate();
+
   return (
     <div>
       <Drawer open={showDrawer} onClose={() => setShowDrawer(false)}>
@@ -57,9 +59,11 @@ export default function AppDrawer() {
             <Typography sx={{ fontWeight: "bold" }}>Alice</Typography>
           </Box>
         </Box>
+
         <List>
+          
           <ListItem>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate("/")}>
               <ListItemIcon>
                 <HomeIcon />
               </ListItemIcon>
@@ -67,10 +71,11 @@ export default function AppDrawer() {
             </ListItemButton>
           </ListItem>
           <Divider />
+
           {auth && (
             <>
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => navigate("/profile/1")}>
                   <ListItemIcon>
                     <ProfileIcon />
                   </ListItemIcon>
@@ -87,10 +92,11 @@ export default function AppDrawer() {
               </ListItem>
             </>
           )}
+
           {!auth && (
             <>
               <ListItem>
-                <ListItemButton>
+                <ListItemButton onClick={() => navigate("/register")}>
                   <ListItemIcon>
                     <RegisterIcon />
                   </ListItemIcon>
@@ -98,7 +104,7 @@ export default function AppDrawer() {
                 </ListItemButton>
               </ListItem>
               <ListItem>
-                <ListItemButton onClick={() => setAuth(true)}>
+                <ListItemButton onClick={() => navigate("/login")}>
                   <ListItemIcon>
                     <LoginIcon />
                   </ListItemIcon>
@@ -107,6 +113,7 @@ export default function AppDrawer() {
               </ListItem>
             </>
           )}
+
         </List>
       </Drawer>
     </div>

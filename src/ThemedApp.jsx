@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useMemo } from "react";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { deepPurple, grey } from "@mui/material/colors";
+import { QueryClient, QueryClientProvider } from "react-query";
 import Template from "./Template";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -9,6 +10,8 @@ import Register from "./pages/Register";
 import Comments from "./pages/Comments";
 import Profile from "./pages/Profile";
 import Likes from "./pages/Likes";
+
+export const queryClient = new QueryClient();
 
 const AppContext = createContext();
 export function useApp() {
@@ -84,7 +87,9 @@ export default function ThemedApp() {
           setMode,
         }}
       >
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
         <CssBaseline />
       </AppContext.Provider>
     </ThemeProvider>
